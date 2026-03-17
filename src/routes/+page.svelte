@@ -1,12 +1,13 @@
 <div class="mx-auto max-w-3xl rounded-lg border border-slate-300 bg-white p-6">
-	<h2 class="text-xl font-semibold">RadioGroup root reproduction</h2>
-	<h2 class="text-lg font-semibold">Bug description</h2>
+	<h2 class="text-xl font-semibold">Bits UI scroll bug reproduction</h2>
 	<p class="mt-2 text-sm text-slate-700">
-		Bits RadioGroup.Root (input) causes the whole page to scroll (including the sidebar).
+		Some Bits UI elements that render a hidden input cause the whole page to scroll (including the
+		sidebar).
 	</p>
 	<p class="mt-2 text-sm text-slate-700">
-		Use the links in the left sidebar to switch between Ark (working) and Bits (broken)
-		implementations. Both pages use the same layout and filler content.
+		I've tested with RadioGroup and Select. I've included an Ark UI version of a RadioGroup to make
+		sure it's not related to the layout/page structure. Both pages use the same layout and filler
+		content.
 	</p>
 	<div class="mt-4 flex gap-3">
 		<a

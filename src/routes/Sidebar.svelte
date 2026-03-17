@@ -9,7 +9,7 @@
 		return `${page.url.pathname}?${params.toString()}`;
 	}
 
-	const showKeyToggles = $derived(page.url.pathname === '/bits' || page.url.pathname === '/ark');
+	const showKeyToggles = $derived(page.url.pathname !== '/');
 
 	const isPreEnabled = $derived(page.url.searchParams.get('pre') !== '0');
 	const isNamedEnabled = $derived(page.url.searchParams.get('named') !== '0');
@@ -23,26 +23,48 @@
 	</p>
 	<nav class="mt-4 flex flex-col gap-2 text-sm">
 		<a
-			href={`/ark?${page.url.searchParams.toString()}`}
+			href={'/'}
 			class={[
 				'rounded border px-3 py-2',
-				page.url.pathname === '/ark/'
+				page.url.pathname === '/'
 					? 'border-blue-600 bg-blue-50 text-blue-700'
 					: 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
 			].join(' ')}
 		>
-			Ark version
+			Home
+		</a>
+		<a
+			href={`/ark?${page.url.searchParams.toString()}`}
+			class={[
+				'rounded border px-3 py-2',
+				page.url.pathname === '/ark'
+					? 'border-blue-600 bg-blue-50 text-blue-700'
+					: 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+			].join(' ')}
+		>
+			Ark RadioGroup
 		</a>
 		<a
 			href={`/bits?${page.url.searchParams.toString()}`}
 			class={[
 				'rounded border px-3 py-2',
-				page.url.pathname === '/bits/'
+				page.url.pathname === '/bits'
 					? 'border-blue-600 bg-blue-50 text-blue-700'
 					: 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
 			].join(' ')}
 		>
-			Bits version
+			Bits RadioGroup
+		</a>
+		<a
+			href={`/bits-select?${page.url.searchParams.toString()}`}
+			class={[
+				'rounded border px-3 py-2',
+				page.url.pathname === '/bits-select'
+					? 'border-blue-600 bg-blue-50 text-blue-700'
+					: 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+			].join(' ')}
+		>
+			Bits Select
 		</a>
 	</nav>
 
@@ -51,7 +73,7 @@
 			<p class="mb-2 text-xs font-semibold tracking-wide text-slate-500 uppercase">Key toggles</p>
 			<div class="space-y-2 text-sm">
 				<div class="rounded border border-slate-200 p-2">
-					<p class="mb-2 text-xs text-slate-600">pre filler</p>
+					<p class="mb-2 text-xs text-slate-600">content before</p>
 					<div class="flex gap-2">
 						<a
 							href={currentRouteUrl({ pre: !isPreEnabled })}
@@ -68,7 +90,7 @@
 					</div>
 				</div>
 				<div class="rounded border border-slate-200 p-2">
-					<p class="mb-2 text-xs text-slate-600">pass name</p>
+					<p class="mb-2 text-xs text-slate-600">pass name prop</p>
 					<div class="flex gap-2">
 						<a
 							href={currentRouteUrl({ named: !isNamedEnabled })}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { Label, RadioGroup, useId } from 'bits-ui';
+	import Select from './Select.svelte';
 
 	const options = [
 		{ value: 'one', label: 'Option one' },
@@ -14,7 +15,7 @@
 	let value = $state('one');
 	const usePreFiller = $derived(page.url.searchParams.get('pre') !== '0');
 	const usePostFiller = true;
-	const useRadioName = $derived(page.url.searchParams.get('named') !== '0');
+	const useName = $derived(page.url.searchParams.get('named') !== '0');
 	const useRootRelativeWrapper = $derived(page.url.searchParams.get('relative') === '1');
 </script>
 
@@ -45,33 +46,9 @@
 	{/if}
 
 	<div class="rounded-lg border border-slate-300 bg-white p-4">
-		<p class="mb-3 text-sm font-medium text-slate-700">Bits RadioGroup</p>
+		<p class="mb-3 text-sm font-medium text-slate-700">Bits Select</p>
 		<div class={useRootRelativeWrapper ? 'relative' : ''}>
-			<RadioGroup.Root
-				name={useRadioName ? 'radio' : undefined}
-				id="bits-repro-radio"
-				orientation="horizontal"
-				bind:value
-				class="flex gap-6"
-			>
-				{#each options as option}
-					{@const itemId = useId()}
-					<div class="flex items-center gap-2">
-						<RadioGroup.Item
-							id={itemId}
-							value={option.value}
-							class="grid h-4 w-4 place-items-center rounded-full border border-slate-400 bg-white"
-						>
-							{#snippet children({ checked })}
-								{#if checked}
-									<div class="h-2 w-2 rounded-full bg-black"></div>
-								{/if}
-							{/snippet}
-						</RadioGroup.Item>
-						<Label.Root for={itemId} class="text-sm text-slate-800">{option.label}</Label.Root>
-					</div>
-				{/each}
-			</RadioGroup.Root>
+			<Select name={useName ? 'bits-repro-select' : undefined} {options} />
 		</div>
 	</div>
 
